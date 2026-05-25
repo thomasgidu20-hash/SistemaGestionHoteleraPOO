@@ -1,13 +1,39 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
+
 package Modelo;
 
-/**
- *
- * @author thomasgiraldoduque
- */
 public class Habitacion {
-    
+
+    protected int numero;
+    protected double precio;
+    protected boolean disponible;
+
+    public Habitacion(int numero, double precio, boolean disponible) {
+
+        this.numero = numero;
+        this.precio = precio;
+        this.disponible = disponible;
+    }
+
+    public double calcularCosto(){
+
+        return precio;
+    }
+
+    public int getNumero() {
+        return numero;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+
+    public boolean isDisponible() {
+        return disponible;
+    }
+
+    public void setDisponible(boolean disponible) {
+        this.disponible = disponible;
+    }
 }
+

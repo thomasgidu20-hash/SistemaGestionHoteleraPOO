@@ -1,13 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelo;
 
-/**
- *
- * @author thomasgiraldoduque
- */
-public class HabitacionSuite {
-    
+public class HabitacionSuite extends Habitacion {
+
+    public HabitacionSuite(int numero, double precio, boolean disponible) {
+
+        super(numero, precio, disponible);
+    }
+
+    @Override
+    public double calcularCosto() {
+
+        return precio * 1.5;
+    }
 }
