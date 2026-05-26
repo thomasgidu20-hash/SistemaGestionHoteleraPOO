@@ -59,5 +59,19 @@ public class Reservas {
         this.fechaSalida = fechaSalida;
     }
     
-    
+    public String generarComprobante(){
+
+    return """
+           ===== RESERVA =====
+           Hu\u00e9sped: """
+            + huesped.getNombreCompleto()
+            + "\nHabitación: "
+            + habitacion.getNumero()
+            + "\nIngreso: "
+            + fechaIngreso
+            + "\nSalida: "
+            + fechaSalida
+            + "\nTotal: "
+            + calcularTotal();
+}
 }

@@ -49,6 +49,8 @@ public ControlHotel(){
         this.listaReservas = listaReservas;
     }
 
+    
+    
     public void registrarHuesped(Huesped h){
 
     listaHuespedes.add(h);
