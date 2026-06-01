@@ -10,7 +10,8 @@ public class main {
          ControlHotel control = new ControlHotel();
 
         // Crear huésped
-        Huesped h1 = new Huesped("Efectivo", 5, "Thomas Giraldo"," 12345", 17, "medico");
+        Huesped h1 = new Huesped("Efectivo", 5, "Thomas Giraldo"," 12345", 17,
+                "medico");
 
         // Crear habitaciones
         HabitacionSimple hab1 = new HabitacionSimple(121, 345, true);
@@ -19,9 +20,9 @@ public class main {
         HabitacionSuite hab2 = new HabitacionSuite(123, 643, true);
                 
         // Registrar habitaciones
-        control.registrarHabitacion(hab1);
+        //control.crearHabitacion(hab1);
 
-        control.registrarHabitacion(hab2);
+        //control.crearHabitacion(hab2);
 
         // Buscar habitación
         Habitacion encontrada =
@@ -42,11 +43,7 @@ public class main {
         );
 
         // Actualizar disponibilidad
-        control.actualizarDisponibilidad(
-                121,
-                false
-        );
-
+        //control.actualizarHabitacion(121, encontrada);
         System.out.println(
                 "Disponibilidad habitación 101: "
                         + hab1.isDisponible()

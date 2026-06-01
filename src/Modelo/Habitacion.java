@@ -24,8 +24,16 @@ public class Habitacion {
         return numero;
     }
 
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
     public double getPrecio() {
         return precio;
+    }
+
+    public void setPrecio(double precio) {
+        this.precio = precio;
     }
 
     public boolean isDisponible() {
@@ -35,5 +43,7 @@ public class Habitacion {
     public void setDisponible(boolean disponible) {
         this.disponible = disponible;
     }
+
+   
 }
 

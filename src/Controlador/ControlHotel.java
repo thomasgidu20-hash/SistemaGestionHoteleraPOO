@@ -1,160 +1,212 @@
-
 package Controlador;
 import Modelo.*;
-import java.util.ArrayList;
 public class ControlHotel {
-    
-private ArrayList<Huesped> listaHuespedes;
-private ArrayList<Habitacion> listaHabitaciones;
-private ArrayList<Reservas> listaReservas;
+
+private Hotel hotel;
 
 public ControlHotel(){
-    listaHuespedes = new ArrayList<>();
-
-    listaHabitaciones = new ArrayList<>();
-
-    listaReservas = new ArrayList<>();
-    
+  
+  hotel = new Hotel();
+  
 }
+public Hotel getHotel() {
 
-    public ControlHotel(ArrayList<Huesped> listaHuespedes
-            , ArrayList<Habitacion> listaHabitaciones,
-            ArrayList<Reservas> listaReservas) {
-        this.listaHuespedes = listaHuespedes;
-        this.listaHabitaciones = listaHabitaciones;
-        this.listaReservas = listaReservas;
-    }
-
-    public ArrayList<Huesped> getListaHuespedes() {
-        return listaHuespedes;
-    }
-
-    public void setListaHuespedes(ArrayList<Huesped> listaHuespedes) {
-        this.listaHuespedes = listaHuespedes;
-    }
-
-    public ArrayList<Habitacion> getListaHabitaciones() {
-        return listaHabitaciones;
-    }
-
-    public void setListaHabitaciones(ArrayList<Habitacion> listaHabitaciones) {
-        this.listaHabitaciones = listaHabitaciones;
-    }
-
-    public ArrayList<Reservas> getListaReservas() {
-        return listaReservas;
-    }
-
-    public void setListaReservas(ArrayList<Reservas> listaReservas) {
-        this.listaReservas = listaReservas;
-    }
-
-    
-    
-    public void registrarHuesped(Huesped h){
-
-    listaHuespedes.add(h);
+    return hotel;
 }
-public Huesped buscarHuesped(String documento){
+    
+    
+ // =========================
+    // HUÉSPEDES
+    // =========================
 
-    for(Huesped h : listaHuespedes){
+     public Huesped crearHuesped(String MetodoPago, double TiempoPermanencia, String NombreCompleto, String Documento, int Edad, String Profesion) {
 
-        if(h.getDocumento().equals(documento)){
-            return h;
+       if (buscarHuesped(Documento)== null){
+           try {
+               Huesped huesped = new Huesped(MetodoPago, TiempoPermanencia, NombreCompleto, Documento, Edad, Profesion);
+               hotel.getListaHuespedes().add(huesped);
+               return huesped;
+               
+           }catch (Exception ex) {
+                System.out.println("error al crear cliente: " + ex.getMessage());
+                return null ;
+       }
+    }else {
+            System.out.println("El cliente ya existe: " + Documento);
+            return null ;
+     }
+    }
+
+    public Huesped buscarHuesped(String Documento) {
+        for (Huesped huesped : hotel.getListaHuespedes()) {
+            if (Documento.equals(huesped.getDocumento())) {
+                return huesped;
+            }
         }
+        return null;
     }
 
-    return null;
-}
+    public boolean eliminarHuesped(String documento) {
+        try {
+            Huesped huesped = buscarHuesped(documento);
 
-public boolean eliminarHuesped(String documento){
+            if (huesped != null) {
+                hotel.listaHuespedes.remove(huesped);
+                return true;
+            }
 
-    for(Huesped h : listaHuespedes){
+            return false;
 
-        if(h.getDocumento().equals(documento)){
-
-            listaHuespedes.remove(h);
-
-            return true;
-        }
-    }
-
-    return false;
-}
-public boolean registrarHabitacion(Habitacion h){
-
-    for(Habitacion hab : listaHabitaciones){
-
-        if(hab.getNumero() == h.getNumero()){
-
+        } catch (Exception e) {
+            System.out.println("Error al eliminar huésped: " + e.getMessage());
             return false;
         }
     }
 
-    listaHabitaciones.add(h);
-
-    return true;
-}
-public Habitacion buscarHabitacion(int numero){
-
-    for(Habitacion hab : listaHabitaciones){
-
-        if(hab.getNumero() == numero){
-            return hab;
+    public boolean actualizarHuesped(String MetodoPago, double TiempoPermanencia,
+            String NombreCompleto, String Documento, int Edad, String Profesion) {
+        Huesped huesped = buscarHuesped(Documento);
+        
+        if(huesped!= null){
+            try{
+                huesped.setDocumento(Documento);
+                huesped.setEdad(Edad);
+                huesped.setMetodoPago(MetodoPago);
+                huesped.setNombreCompleto(NombreCompleto);
+                huesped.setTiempoPermanencia(TiempoPermanencia);
+                huesped.setMetodoPago(MetodoPago);
+                return true;
+            }catch (Exception ex) {
+                System.out.println("error al actualizar el huesped: " + ex.getMessage());
+                return false;
+            } 
+        }else {
+            System.out.println("El huesped no existe: " + Documento);
+            return false;
         }
     }
 
-    return null;
-}
-public boolean eliminarHabitacion(int numero){
+    // =========================
+    // HABITACIONES
+    // =========================
 
-    for(Habitacion hab : listaHabitaciones){
+    public Habitacion crearHabitacion(int numero, double precio, boolean disponible) {
+        if (buscarHabitacion(numero)== null){
+            try{
+                Habitacion habitacion = new Habitacion(numero, precio, disponible);
+                hotel.getListaHabitaciones().add(habitacion);
+                return habitacion;
+            }catch (Exception ex){
+               System.out.println("error al crear la habitacion: " + ex.getMessage());
+                return null ;                
+            }
+        }else {
+            System.out.println("El cliente ya existe: " + numero);
+            return null ;
+    }
+    }
 
-        if(hab.getNumero() == numero){
+    public Habitacion buscarHabitacion(int numero) {
+        try {
+            for (Habitacion habitacion : hotel.listaHabitaciones) {
+                if (numero == habitacion.getNumero()) {
+                    return habitacion;
+                }
+            }
 
-            listaHabitaciones.remove(hab);
+        } catch (Exception e) {
+            System.out.println("Error al buscar habitación: " + e.getMessage());
+        }
 
-            return true;
+        return null;
+    }
+
+    public boolean eliminarHabitacion(int numero) {
+        try {
+            Habitacion habitacion = buscarHabitacion(numero);
+
+            if (habitacion != null) {
+                hotel.listaHabitaciones.remove(habitacion);
+                return true;
+            }
+
+            return false;
+
+        } catch (Exception e) {
+            System.out.println("Error al eliminar habitación: " + e.getMessage());
+            return false;
         }
     }
 
-    return false;
-}
-public boolean actualizarDisponibilidad(int numero,boolean disponible){
-
-    Habitacion hab = buscarHabitacion(numero);
-
-    if(hab != null){
-
-        hab.setDisponible(disponible);
-
-        return true;
+    public boolean actualizarHabitacion(int numero, double precio, boolean disponible) {
+        Habitacion habitacion = buscarHabitacion(numero);
+        if (habitacion != null){
+            try {
+                habitacion.setNumero(numero);
+                habitacion.setDisponible(disponible);
+                habitacion.setPrecio(precio);
+                return true;
+            }catch (Exception ex) {
+                System.out.println("error al actualizar la habitacion: " + ex.getMessage());
+                return false;
+            } 
+        }else {
+            System.out.println("La habitacion no existe: " + numero);
+            return false;
+    }
     }
 
-    return false;
-}
-public boolean crearReservas(Reservas r){
+    public boolean actualizarDisponibilidadHabitacion(int numero, boolean disponible) {
+        try {
+            Habitacion habitacion = buscarHabitacion(numero);
 
-    if(!r.getHabitacion().isDisponible()){
+            if (habitacion != null) {
+                habitacion.setDisponible(disponible);
+                return true;
+            }
 
-        return false;
+            return false;
+
+        } catch (Exception e) {
+            System.out.println("Error al actualizar disponibilidad: " + e.getMessage());
+            
+        }
+      return false;
     }
 
-    r.getHabitacion().setDisponible(false);
+  // =========================
+    // RESERVAS
+    // =========================
 
-    listaReservas.add(r);
+    public boolean crearReserva() {
 
-    return true;
-}
-public boolean cancelarReservas(Reservas r){
-
-    if(listaReservas.remove(r)){
-
-        r.getHabitacion().setDisponible(true);
-
-        return true;
     }
 
-    return false;
+    public boolean eliminarReserva(int numeroHabitacion) {
+        try {
+            Reservas reservaEncontrada = null;
+
+            for (Reservas r : hotel.listaReservas) {
+                if (r.getHabitacion().getNumero() == numeroHabitacion) {
+                    reservaEncontrada = r;
+                    break;
+                }
+            }
+
+            if (reservaEncontrada != null) {
+                reservaEncontrada.getHabitacion().setDisponible(true);
+                hotel.listaReservas.remove(reservaEncontrada);
+                return true;
+            }
+
+            return false;
+
+        } catch (Exception e) {
+            System.out.println("Error al eliminar reserva: " + e.getMessage());
+            return false;
+        }
+    }
 }
-}
+
+
+
