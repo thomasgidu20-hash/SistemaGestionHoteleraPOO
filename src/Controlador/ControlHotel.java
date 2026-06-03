@@ -1,5 +1,6 @@
 package Controlador;
 import Modelo.*;
+import java.time.LocalDate;
 public class ControlHotel {
 
 private Hotel hotel;
@@ -178,9 +179,35 @@ public Hotel getHotel() {
     // RESERVAS
     // =========================
 
-    public boolean crearReserva() {
-
+   public Reservas crearReserva(String documento, int numero, LocalDate fechaIngreso, LocalDate fechaSalida) {
+    Huesped huesped = buscarHuesped(documento);
+    if (huesped == null) {
+        System.out.println("El huésped no existe: " + documento);
+        return null;
     }
+
+    Habitacion habitacion = buscarHabitacion(numero);
+    if (habitacion == null) {
+        System.out.println("La habitación no existe: " + numero);
+        return null;
+    }
+
+    if (!habitacion.isDisponible()) {
+        System.out.println("La habitación no está disponible.");
+        return null;
+    }
+
+    if (fechaSalida.isBefore(fechaIngreso)) {
+        System.out.println("Fecha de salida menor que fecha de ingreso.");
+        return null;
+    }
+
+    Reservas reserva = new Reservas(huesped, habitacion, fechaIngreso, fechaSalida);
+    getHotel().getListaReservas().add(reserva);
+    habitacion.setDisponible(false);
+
+    return reserva;
+}
 
     public boolean eliminarReserva(int numeroHabitacion) {
         try {

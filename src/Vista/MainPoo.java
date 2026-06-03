@@ -4,14 +4,18 @@ import java.time.LocalDate;
 import javax.swing.JOptionPane;
 import Controlador.ControlHotel;
 import Modelo.*;
+import javax.swing.table.DefaultTableModel;
 public class MainPoo extends javax.swing.JFrame {
-
+  DefaultTableModel dtmReservas;
     ControlHotel hotel;
     public MainPoo() {
         initComponents();
         setLocationRelativeTo(null);
         LlenarCombox();
         hotel = new ControlHotel();
+        dtmReservas = new DefaultTableModel(new Object[]{"Nombre","Documento","Precio","Numero Hab"}, 0);
+        tblReservaDatos.setModel(dtmReservas);
+        ListarReservas();
     }
 
     /**
@@ -80,6 +84,8 @@ public class MainPoo extends javax.swing.JFrame {
         tblReservaDatos = new javax.swing.JTable();
         btnCrearReserva = new javax.swing.JButton();
         cbxEliminarReserva = new javax.swing.JButton();
+        jblFinalNumero = new javax.swing.JLabel();
+        txtFinalNumero = new javax.swing.JTextField();
 
         jMenu1.setText("jMenu1");
 
@@ -417,59 +423,27 @@ public class MainPoo extends javax.swing.JFrame {
 
         btnCrearReserva.setFont(new java.awt.Font("Kefa", 3, 14)); // NOI18N
         btnCrearReserva.setText("Crear");
+        btnCrearReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCrearReservaActionPerformed(evt);
+            }
+        });
 
         cbxEliminarReserva.setFont(new java.awt.Font("Kefa", 3, 14)); // NOI18N
         cbxEliminarReserva.setText("Eliminar");
+        cbxEliminarReserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxEliminarReservaActionPerformed(evt);
+            }
+        });
+
+        jblFinalNumero.setFont(new java.awt.Font("Mshtakan", 2, 14)); // NOI18N
+        jblFinalNumero.setText("Por ultimo pon el numero de la habiatcion :");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(106, 106, 106)
-                        .addComponent(jblDiaIngreso)
-                        .addGap(5, 5, 5)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jblFechaIngreso)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
-                                .addComponent(jblMesIngreso)
-                                .addGap(35, 35, 35)
-                                .addComponent(jblAñoIngreso))))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addComponent(cbxDiaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(17, 17, 17)
-                        .addComponent(cbxMesIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)
-                        .addComponent(cbxAñoIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(194, 194, 194)
-                                .addComponent(jblDiaSalida)
-                                .addGap(18, 18, 18)
-                                .addComponent(jblMesSalida))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbxDiaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxMesSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(34, 34, 34)
-                                .addComponent(jblAñoSalida))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(cbxAñoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jblFechaSalida)
-                        .addGap(130, 130, 130))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,6 +459,55 @@ public class MainPoo extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(cbxEliminarReserva)
                 .addGap(164, 164, 164))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(84, 84, 84)
+                                .addComponent(jblDiaIngreso)
+                                .addGap(52, 52, 52)
+                                .addComponent(jblMesIngreso)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jblAñoIngreso)
+                                .addGap(13, 13, 13))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(66, 66, 66)
+                                .addComponent(cbxDiaIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jblFechaIngreso)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(cbxMesIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(17, 17, 17)
+                                        .addComponent(cbxAñoIngreso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(149, 149, 149)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(cbxMesSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addComponent(jblDiaSalida)
+                                        .addGap(40, 40, 40)
+                                        .addComponent(jblMesSalida)))
+                                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(jblAñoSalida))
+                                    .addGroup(jPanel4Layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cbxAñoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addGap(47, 47, 47)
+                                .addComponent(jblFechaSalida))))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(jblFinalNumero)
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cbxDiaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtFinalNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -511,9 +534,13 @@ public class MainPoo extends javax.swing.JFrame {
                     .addComponent(cbxDiaSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxAñoSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbxMesSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(57, 57, 57)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jblFinalNumero)
+                    .addComponent(txtFinalNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCrearReserva)
                     .addComponent(cbxEliminarReserva))
@@ -596,6 +623,16 @@ public class MainPoo extends javax.swing.JFrame {
         EliminarHabitacion();
     }//GEN-LAST:event_btnEliminarHabitacionActionPerformed
 
+    private void btnCrearReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearReservaActionPerformed
+        // TODO add your handling code here:
+        CrearReservas();
+    }//GEN-LAST:event_btnCrearReservaActionPerformed
+
+    private void cbxEliminarReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxEliminarReservaActionPerformed
+        // TODO add your handling code here:
+        EliminarReservas();
+    }//GEN-LAST:event_cbxEliminarReservaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -672,6 +709,7 @@ public class MainPoo extends javax.swing.JFrame {
     private javax.swing.JLabel jblEdad;
     private javax.swing.JLabel jblFechaIngreso;
     private javax.swing.JLabel jblFechaSalida;
+    private javax.swing.JLabel jblFinalNumero;
     private javax.swing.JLabel jblMesIngreso;
     private javax.swing.JLabel jblMesSalida;
     private javax.swing.JLabel jblMetodoPago;
@@ -685,6 +723,7 @@ public class MainPoo extends javax.swing.JFrame {
     private javax.swing.JTable tblReservaDatos;
     private javax.swing.JTextField txtDocumento;
     private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtFinalNumero;
     private javax.swing.JTextField txtNombreCompleto;
     private javax.swing.JTextField txtNumeroHabitacion;
     private javax.swing.JTextField txtPrecio;
@@ -725,9 +764,9 @@ public class MainPoo extends javax.swing.JFrame {
            JOptionPane.showMessageDialog(this,"El nombre es obligatorio");
        }else if (txtDocumento.getText().equals("")){
            JOptionPane.showMessageDialog(this,"El documento es obligatorio");
-       }else if (txtEdad.getText().equals(" ")){
-           JOptionPane.showMessageDialog(this,"La edad es obligatoria");
-       }else if (txtProfesion.getText().equals(" ")){
+       }else if(txtEdad.getText().trim().isEmpty()){
+          JOptionPane.showMessageDialog(this, "La edad es obligatoria");
+       }else if (txtProfesion.getText().equals("")){
            JOptionPane.showMessageDialog(this,"La profesion es obligatoria");
        }else{
            String Nombre = txtNombreCompleto.getText();
@@ -741,6 +780,7 @@ public class MainPoo extends javax.swing.JFrame {
            Huesped huesped = hotel.crearHuesped(MetodoPago, DiasPermanencia, Nombre, Documento, Edad, Profesion);
            
            if (huesped != null){
+               ListarReservas();
             JOptionPane.showMessageDialog(this, "Huesped creado correctamente ...");
             System.out.println(huesped.getDocumento() + " - " + huesped.getNombreCompleto());
              
@@ -800,10 +840,10 @@ public class MainPoo extends javax.swing.JFrame {
        }else if (txtDocumento.getText().equals("")){
            JOptionPane.showMessageDialog(this,"El documento es obligatorio");
            return false;
-       }else if (txtEdad.getText().equals(" ")){
+       }else if (txtEdad.getText().equals("")){
            JOptionPane.showMessageDialog(this,"La edad es obligatoria");
            return false;
-       }else if (txtProfesion.getText().equals(" ")){
+       }else if (txtProfesion.getText().equals("")){
            JOptionPane.showMessageDialog(this,"La profesion es obligatoria");
            return false;
     }else{
@@ -815,13 +855,19 @@ public class MainPoo extends javax.swing.JFrame {
     
     public void LimpiarCampos(){
         txtNombreCompleto.setText("");
-           txtDocumento.setText("");
+           //txtDocumento.setText("");
            txtProfesion.setText("");
            txtEdad.setText("");
            cbxMetodoPago.setSelectedItem(0);
            cbxTiempoEstadia.setSelectedItem(0);
            txtPrecio.setText("");
            txtNumeroHabitacion.setText("");
+           cbxDiaIngreso.setSelectedItem(0);
+           cbxDiaSalida.setSelectedItem(0);
+           cbxMesIngreso.setSelectedItem(0);
+           cbxMesSalida.setSelectedItem(0);
+           cbxAñoIngreso.setSelectedItem(0);
+           cbxAñoSalida.setSelectedItem(0);
     }
 
     private void EliminarHuesped() {
@@ -854,7 +900,7 @@ public class MainPoo extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error al crear la habitacion ... puede que ya exista.");
         }
        }
-       
+       LimpiarCampos();
     }
 
     private void BuscarHabitacion() {
@@ -879,19 +925,119 @@ public class MainPoo extends javax.swing.JFrame {
     }
 
     private void ActualizarDisponibilidad() {
-       int numero = Integer.parseInt(
-            txtNumeroHabitacion.getText().trim()
-    );
 
-    boolean disponible = rbtDisponible.isSelected();
+    if(txtNumeroHabitacion.getText().trim().isEmpty()){
+    JOptionPane.showMessageDialog(this,
+            "Ingrese el número de habitación");
+    return;
+}
 
-    boolean actualizado =hotel.actualizarDisponibilidadHabitacion(numero, disponible);
+    int numero =Integer.parseInt(txtNumeroHabitacion.getText().trim());
+
+    boolean disponible =
+            rbtDisponible.isSelected();
+
+    boolean actualizado =
+            hotel.actualizarDisponibilidadHabitacion(
+                    numero,
+                    disponible
+            );
 
     if (actualizado) {
-    JOptionPane.showMessageDialog(this,"Disponibilidad actualizada correctamente.");
-    LimpiarCampos();
+
+    if(disponible){
+        JOptionPane.showMessageDialog(this,
+                "La habitación quedó disponible.");
     } else {
-        JOptionPane.showMessageDialog(this,"No se encontró la habitación.");
+        JOptionPane.showMessageDialog(this,
+                "La habitación no esta disponible.");
     }
-    }    
+
+    LimpiarCampos();
+
+} else {
+
+    JOptionPane.showMessageDialog(this,
+            "No se encontró la habitación.");
 }
+}
+
+private void ListarReservas() {
+    dtmReservas.setRowCount(0);
+
+    for (Reservas r : hotel.getHotel().getListaReservas()) {
+        dtmReservas.addRow(new Object[]{
+                r.getHuesped().getNombreCompleto(),
+                r.getHuesped().getDocumento(),
+                r.getHabitacion().getPrecio(),
+                r.getHabitacion().getNumero()
+        });
+    }
+}
+
+private void CrearReservas() {
+    JOptionPane.showMessageDialog(this,
+    "Documento=[" + txtDocumento.getText() + "]\n" +
+    "Numero=[" + txtFinalNumero.getText() + "]");
+    System.out.println("Entró a CrearReserva");
+    System.out.println("txtDocumento = [" + txtDocumento.getText() + "]");
+    String documento = txtDocumento.getText().trim();
+    String numeroText = txtFinalNumero.getText().trim();
+
+    System.out.println("Documento: " + documento);
+    System.out.println("Numero habitacion: " + numeroText);
+
+    if (documento.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El documento es obligatorio.");
+        return;
+    }
+
+    if (numeroText.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "El número de habitación es obligatorio.");
+        return;
+    }
+
+    try {
+        int numero = Integer.parseInt(numeroText);
+        int DiaIngreso = Integer.parseInt(cbxDiaIngreso.getSelectedItem().toString());
+        int MesIngreso = Integer.parseInt(cbxMesIngreso.getSelectedItem().toString());
+         int AñoIngreso = Integer.parseInt(cbxAñoIngreso.getSelectedItem().toString());
+
+        int DiaSalida = Integer.parseInt(cbxDiaSalida.getSelectedItem().toString());
+        int MesSalida = Integer.parseInt(cbxMesSalida.getSelectedItem().toString());
+        int AñoSalida = Integer.parseInt(cbxAñoSalida.getSelectedItem().toString());
+
+        LocalDate fechaIngreso = LocalDate.of(AñoIngreso, MesIngreso, DiaIngreso);
+        LocalDate fechaSalida = LocalDate.of(AñoSalida, MesSalida, DiaSalida);
+
+        Reservas reserva = hotel.crearReserva(documento, numero, fechaIngreso, fechaSalida);
+
+        System.out.println("Reserva creada: " + reserva);
+        System.out.println("Cantidad reservas: " + hotel.getHotel().getListaReservas().size());
+
+        if (reserva != null) {
+            JOptionPane.showMessageDialog(this, "Reserva creada correctamente.");
+            ListarReservas();
+        } else {
+            JOptionPane.showMessageDialog(this, "No se pudo crear la reserva.");
+        }
+
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "El número de habitación debe ser numérico.");
+    }
+}
+
+    private void EliminarReservas() {
+      boolean reservaEliminada = hotel.eliminarReserva(Integer.parseInt(txtFinalNumero.getText().trim()));
+        if (reservaEliminada){
+            JOptionPane.showMessageDialog(this, "La reserva ha sido eliminado...");
+            LimpiarCampos();
+            ListarReservas();
+        }else{
+            JOptionPane.showMessageDialog(this, "No se encuentra la reserva.");
+        }
+    }
+      
+    }
+
+

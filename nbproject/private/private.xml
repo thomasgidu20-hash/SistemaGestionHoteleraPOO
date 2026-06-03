@@ -5,8 +5,9 @@
         <group>
             <file>file:/Users/thomasgiraldoduque/NetBeansProjects/ProyectoFinalPOO/src/Controlador/ControlHotel.java</file>
             <file>file:/Users/thomasgiraldoduque/NetBeansProjects/ProyectoFinalPOO/src/Vista/MainPoo.java</file>
+            <file>file:/Users/thomasgiraldoduque/NetBeansProjects/ProyectoFinalPOO/src/Modelo/Hotel.java</file>
+            <file>file:/Users/thomasgiraldoduque/NetBeansProjects/ProyectoFinalPOO/src/Modelo/Reservas.java</file>
             <file>file:/Users/thomasgiraldoduque/NetBeansProjects/ProyectoFinalPOO/src/Modelo/Persona.java</file>
-            <file>file:/Users/thomasgiraldoduque/NetBeansProjects/ProyectoFinalPOO/src/Modelo/Huesped.java</file>
         </group>
     </open-files>
 </project-private>
