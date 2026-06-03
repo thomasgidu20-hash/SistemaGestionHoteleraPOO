@@ -1,6 +1,10 @@
 
 package Modelo;
-
+/**
+ * Representa a un empleado del hotel.
+ * Hereda los atributos de Persona y agrega
+ * información relacionada con el salario y las horas de trabajo.
+ */
 public class Empleado extends Persona {
     
     private double Salario;

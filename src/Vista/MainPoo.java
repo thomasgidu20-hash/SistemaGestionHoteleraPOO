@@ -976,9 +976,6 @@ private void ListarReservas() {
 }
 
 private void CrearReservas() {
-    JOptionPane.showMessageDialog(this,
-    "Documento=[" + txtDocumento.getText() + "]\n" +
-    "Numero=[" + txtFinalNumero.getText() + "]");
     System.out.println("Entró a CrearReserva");
     System.out.println("txtDocumento = [" + txtDocumento.getText() + "]");
     String documento = txtDocumento.getText().trim();
