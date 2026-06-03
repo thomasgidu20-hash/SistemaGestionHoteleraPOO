@@ -1,6 +1,9 @@
 
 package Modelo;
-
+/**
+ * Representa el tipo habitación del hotel.
+ * Hereda los atributos de las clase habiatcion
+ */
 public class HabitacionSuite extends Habitacion {
 
     public HabitacionSuite(int numero, double precio, boolean disponible) {

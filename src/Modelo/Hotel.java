@@ -2,7 +2,12 @@
 package Modelo;
 
 import java.util.ArrayList;
-
+/**
+ * Clase encargada de almacenar todas las listas
+ * principales del sistema:
+ * huéspedes, habitaciones y reservas.
+ * Funciona como contenedor de la información del hotel.
+ */
 public class Hotel {
     public ArrayList<Huesped> listaHuespedes;
     public ArrayList<Habitacion> listaHabitaciones;

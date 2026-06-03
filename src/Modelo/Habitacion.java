@@ -1,7 +1,11 @@
 
 
 package Modelo;
-
+/**
+ * Representa una habitación del hotel.
+ * Permite almacenar el número de habitación,
+ * el precio y su estado de disponibilidad.
+ */
 public class Habitacion {
 
     protected int numero;

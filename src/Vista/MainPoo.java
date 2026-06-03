@@ -5,6 +5,12 @@ import javax.swing.JOptionPane;
 import Controlador.ControlHotel;
 import Modelo.*;
 import javax.swing.table.DefaultTableModel;
+/**
+ * Interfaz gráfica principal del sistema.
+ * Permite al usuario interactuar con el programa
+ * mediante formularios para gestionar huéspedes,
+ * habitaciones y reservas.
+ */
 public class MainPoo extends javax.swing.JFrame {
   DefaultTableModel dtmReservas;
     ControlHotel hotel;
@@ -257,7 +263,7 @@ public class MainPoo extends javax.swing.JFrame {
         jblCostoDoble.setText("Habitacion doble costo de 300$");
 
         jblCostoSuite.setFont(new java.awt.Font("Mshtakan", 2, 14)); // NOI18N
-        jblCostoSuite.setText("Habitacion suite costo de 600");
+        jblCostoSuite.setText("Habitacion suite costo de 600$");
 
         jblDisponibleHab.setFont(new java.awt.Font("Mshtakan", 2, 14)); // NOI18N
         jblDisponibleHab.setText("Disponible :");
@@ -327,22 +333,21 @@ public class MainPoo extends javax.swing.JFrame {
                         .addComponent(txtPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(277, 277, 277)
-                .addComponent(jblTipoHabitaciones)
-                .addGap(77, 77, 77))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jblCostoSimple)
-                .addGap(43, 43, 43)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jblCostoDoble)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jblCostoSuite)
-                        .addGap(29, 29, 29))
+                        .addGap(277, 277, 277)
+                        .addComponent(jblTipoHabitaciones))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(txtNumeroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGap(23, 23, 23)
+                        .addComponent(jblCostoSimple)
+                        .addGap(43, 43, 43)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jblCostoDoble)
+                                .addGap(33, 33, 33)
+                                .addComponent(jblCostoSuite, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNumeroHabitacion, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -1,6 +1,11 @@
 
 package Modelo;
-
+/**
+ * Representa a un huésped del hotel.
+ * Hereda los atributos de Persona y agrega
+ * información relacionada con la estadía,
+ * como método de pago y tiempo de permanencia.
+ */
 public class Huesped extends Persona{
     
     private String MetodoPago;

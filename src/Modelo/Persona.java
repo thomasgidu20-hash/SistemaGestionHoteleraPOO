@@ -1,6 +1,11 @@
 
 package Modelo;
-
+/**
+ * Clase base del sistema.
+ * Almacena la información general de una persona,
+ * como nombre, documento,edad y preofesion .
+ * Esta clase es heredada por la clase Huesped y la clase empleado.
+ */
 public class Persona {
     
     private String NombreCompleto;

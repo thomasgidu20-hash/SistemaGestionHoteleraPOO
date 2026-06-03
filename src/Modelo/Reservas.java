@@ -2,7 +2,11 @@
 package Modelo;
 
 import java.time.LocalDate;
-
+/**
+ * Representa una reserva realizada por un huésped.
+ * Relaciona un huésped con una habitación y
+ * almacena las fechas de ingreso y salida.
+ */
 public class Reservas {
     
     private Huesped huesped;

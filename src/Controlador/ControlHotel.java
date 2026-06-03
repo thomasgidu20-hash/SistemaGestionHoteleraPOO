@@ -1,6 +1,12 @@
 package Controlador;
 import Modelo.*;
 import java.time.LocalDate;
+/**
+ * Clase controladora del sistema.
+ * Contiene toda la lógica de negocio y los
+ * métodos CRUD para huéspedes, habitaciones y reservas.
+ * Además valida los datos antes de almacenarlos.
+ */
 public class ControlHotel {
 
 private Hotel hotel;
